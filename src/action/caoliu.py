@@ -15,17 +15,18 @@ from bs4 import BeautifulSoup
 class Frame(wx.Frame):
 
     def __init__(self):
-        wx.Frame.__init__(self, None, -1, "CaoLiu Spider", size=(500, 300))
+        wx.Frame.__init__(self, None, -1, "CaoLiu Spider", size=(500, 300),
+                          style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER|wx.MAXIMIZE_BOX))
         self.panel = wx.Panel(self, -1)
-        self.button = wx.Button(self.panel, -1, "Download", pos=(350, 10))
+        self.button = wx.Button(self.panel, -1, "Download", pos=(400, 10), size=(-1,40))
         self.Bind(wx.EVT_BUTTON, self.BookSpider, self.button)
         wx.StaticText(self.panel, -1, "URL:", pos=(10, 20))
-        self.posCtrl = wx.TextCtrl(self.panel, -1, "", pos=(40, 10), size=(300,-1))
-        wx.StaticText(self.panel, -1, "", pos=(10, 50), size=(500,200))
+        self.posCtrl = wx.TextCtrl(self.panel, -1, "", pos=(40, 10), size=(350,40))
+        wx.StaticText(self.panel, -1, "...", pos=(10, 50), size=(500,200))
 
     def BookSpider(self, event):
         i = 1
-        url = self.posCtrl.GetValue()
+        url = self.posCtrl.GetValue()   #EX:http://mi.lesile.net/read.php?tid=617048&fpage=0&toread=&page=
         name = ""
         TEMP_DIR = os.getcwd() + "/.temp/"
         HOME = os.path.expanduser("~")
